@@ -1,0 +1,3 @@
+export {default as Welcome} from './components/Welcome.vue';
+export {default as SignUp} from './components/SignUp.vue';
+export {default as Login} from './components/Login.vue';
