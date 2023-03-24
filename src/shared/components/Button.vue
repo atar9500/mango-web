@@ -31,6 +31,18 @@ const _style = computed<string>(
   font-weight: bold;
   font-size: var(--font-size-medium);
   cursor: pointer;
+  transition: opacity var(--animate-fast) linear;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.root:active {
+  opacity: 0.75;
+}
+
+.root:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .wide {

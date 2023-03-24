@@ -3,12 +3,6 @@
     <Logo />
     <div :class="$style.options">
       <Input :class="$style.field" v-model="email" placeholder="Email" wide />
-      <Input
-        :class="$style.field"
-        type="password"
-        placeholder="Password"
-        v-model="password"
-        wide />
       <Button :class="$style.continue" wide>Sign Up</Button>
     </div>
   </div>
@@ -22,7 +16,6 @@ import Input from '~/shared/components/Input.vue';
 import Logo from './Logo.vue';
 
 const email = ref('');
-const password = ref('');
 </script>
 
 <style module>
@@ -30,7 +23,7 @@ const password = ref('');
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
   padding: 32px;
 }

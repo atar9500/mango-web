@@ -29,7 +29,7 @@ const onLogin = () => {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
   padding: 32px;
 }

@@ -8,5 +8,6 @@
 .title {
   font-size: var(--font-size-xxxlarge);
   font-size: bold;
+  margin: 0 0 var(--spacing-xxxlarge) 0;
 }
 </style>

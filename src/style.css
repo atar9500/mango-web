@@ -41,6 +41,11 @@ button {
   --spacing-large: 24px;
   --spacing-xlarge: 32px;
   --spacing-xxlarge: 48px;
+  --spacing-xxxlarge: 72px;
+
+  --animate-fast: 150ms;
+  --animate-normal: 300ms;
+  --animdate-slow: 700ms;
 }
 
 @media (prefers-color-scheme: light) {
@@ -50,6 +55,7 @@ button {
     --accent-color: #8dc63f;
     --background-color: #f0e2e7;
     --text-color: #212121;
+    --shadow-color: #212121;
     --warning-color: #eaca44;
     --error-color: #ef4d4d;
 
@@ -65,6 +71,7 @@ button {
     --accent-color: #8dc63f;
     --background-color: #f0e2e7;
     --text-color: #212121;
+    --shadow-color: #212121;
     --light-text-color: #fefefe;
     --warning-color: #eaca44;
     --error-color: #ef4d4d;
