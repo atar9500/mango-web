@@ -4,8 +4,6 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #242424;
-  background-color: #f0e2e7;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,11 +26,50 @@ button {
 #app {
   display: flex;
   flex: 1;
+
+  --font-size-small: 14px;
+  --font-size-normal: 16px;
+  --font-size-medium: 18px;
+  --font-size-large: 24px;
+  --font-size-xlarge: 32px;
+  --font-size-xxlarge: 48px;
+  --font-size-xxxlarge: 72px;
+
+  --spacing-tiny: 4px;
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  --spacing-xlarge: 32px;
+  --spacing-xxlarge: 48px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --primary-color: #0077c8;
+    --secondary-color: #f9a41a;
+    --accent-color: #8dc63f;
+    --background-color: #f0e2e7;
+    --text-color: #212121;
+    --warning-color: #eaca44;
+    --error-color: #ef4d4d;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #0077c8;
+    --secondary-color: #f9a41a;
+    --accent-color: #8dc63f;
+    --background-color: #f0e2e7;
+    --text-color: #212121;
+    --light-text-color: #fefefe;
+    --warning-color: #eaca44;
+    --error-color: #ef4d4d;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
   }
 }

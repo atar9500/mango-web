@@ -1,25 +1,39 @@
 <template>
-  <button :class="[$style.root, style]" @click="onClick">
+  <button :class="[_style, style]" @click="onClick">
     <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
+import {computed, useCssModule} from 'vue';
+
 type ButtonProps = {
   onClick?: () => void;
+  wide?: boolean;
   style?: string;
 };
 
-defineProps<ButtonProps>();
+const {wide} = defineProps<ButtonProps>();
+const $style = useCssModule();
+
+const _style = computed<string>(
+  () => `${$style.root} ${wide ? $style.wide : ''}`,
+);
 </script>
 
 <style module>
 .root {
-  background-color: transparent;
-  border-radius: 8px;
-  padding: 4px 8px;
-  border: 1px solid #b20d30;
-  color: #b20d30;
+  background-color: var(--primary-color);
+  border-radius: var(--spacing-small);
+  padding: var(--spacing-small);
+  border: none;
+  color: var(--light-text-color);
+  font-weight: bold;
+  font-size: var(--font-size-medium);
   cursor: pointer;
+}
+
+.wide {
+  width: 100%;
 }
 </style>

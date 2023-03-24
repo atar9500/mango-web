@@ -1,11 +1,9 @@
 <template>
   <div :class="$style.root">
-    <h1>MANGO</h1>
+    <Logo />
     <div :class="$style.options">
-      <Button :style="`${$style.signUp} ${$style.button}`" :on-click="onSignUp"
-        >Sign Up</Button
-      >
-      <Button :style="$style.button" :on-click="onLogin">Login</Button>
+      <Button :style="$style.signUp" wide :on-click="onSignUp">Sign Up</Button>
+      <Button wide :on-click="onLogin">Login</Button>
     </div>
   </div>
 </template>
@@ -13,6 +11,7 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router';
 import Button from '~/shared/components/Button.vue';
+import Logo from './Logo.vue';
 
 const router = useRouter();
 
@@ -40,10 +39,6 @@ const onLogin = () => {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.button {
-  width: 100%;
 }
 
 .signUp {

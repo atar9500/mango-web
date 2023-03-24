@@ -1,15 +1,22 @@
 <template>
   <div :class="$style.root">
-    <h1>Login</h1>
+    <Logo />
     <div :class="$style.options">
-      <Button :style="`${$style.signUp} ${$style.button}`">Sign Up</Button>
-      <Button :style="$style.button">Log In</Button>
+      <Input :class="$style.field" placeholder="Email" wide />
+      <Input
+        :class="$style.field"
+        type="password"
+        placeholder="Password"
+        wide />
+      <Button :class="$style.continue" wide>Log In</Button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Button from '~/shared/components/Button.vue';
+import Input from '~/shared/components/Input.vue';
+import Logo from './Logo.vue';
 </script>
 
 <style module>
@@ -22,15 +29,19 @@ import Button from '~/shared/components/Button.vue';
   padding: 32px;
 }
 
+.field {
+  margin: 0 0 var(--spacing-small) 0;
+}
+
+.continue {
+  margin: var(--spacing-large) 0 0 0;
+}
+
 .options {
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.button {
-  width: 100%;
 }
 
 .signUp {
