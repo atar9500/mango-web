@@ -2,9 +2,15 @@
   <div :class="$style.root">
     <Logo />
     <div :class="$style.options">
-      <Input :class="$style.field" placeholder="Email" wide />
       <Input
         :class="$style.field"
+        v-model="email"
+        type="email"
+        placeholder="Email"
+        wide />
+      <Input
+        :class="$style.field"
+        v-model="password"
         type="password"
         placeholder="Password"
         wide />
@@ -14,9 +20,15 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue';
+
 import Button from '~/shared/components/Button.vue';
 import Input from '~/shared/components/Input.vue';
+
 import Logo from './Logo.vue';
+
+const email = ref('');
+const password = ref('');
 </script>
 
 <style module>

@@ -1,20 +1,27 @@
 <template>
-  <input :class="_style" />
+  <input
+    :class="_style"
+    @input="
+      $emit('update:modelValue', ($event?.target as HTMLInputElement)?.value)
+    "
+    :value="modelValue" />
 </template>
 
 <script setup lang="ts">
-import {computed, useCssModule} from 'vue';
+import {computed, useCssModule, defineEmits} from 'vue';
 
-type ButtonProps = {
+type InputProps = {
   wide?: boolean;
   style?: string;
+  modelValue?: string;
 };
 
-const {wide} = defineProps<ButtonProps>();
+const {wide} = defineProps<InputProps>();
+defineEmits(['update:modelValue']);
 const $style = useCssModule();
 
 const _style = computed<string>(
-  () => `${$style.root} ${wide ? $style.wide : ''}`,
+  () => `${$style.root} ${wide ? $style.wide : ''} ${wide ? $style.wide : ''}`,
 );
 </script>
 
@@ -28,6 +35,11 @@ const _style = computed<string>(
   padding: var(--spacing-small);
   box-sizing: border-box;
   outline: none;
+}
+
+.error {
+  border: 1px solid var(--error-color);
+  color: var(--error-color);
 }
 
 .root::placeholder {

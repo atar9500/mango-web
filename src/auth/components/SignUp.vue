@@ -2,11 +2,12 @@
   <div :class="$style.root">
     <Logo />
     <div :class="$style.options">
-      <Input :class="$style.field" placeholder="Email" wide />
+      <Input :class="$style.field" v-model="email" placeholder="Email" wide />
       <Input
         :class="$style.field"
         type="password"
         placeholder="Password"
+        v-model="password"
         wide />
       <Button :class="$style.continue" wide>Sign Up</Button>
     </div>
@@ -14,9 +15,14 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue';
+
 import Button from '~/shared/components/Button.vue';
 import Input from '~/shared/components/Input.vue';
 import Logo from './Logo.vue';
+
+const email = ref('');
+const password = ref('');
 </script>
 
 <style module>
