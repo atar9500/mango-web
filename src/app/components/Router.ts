@@ -1,11 +1,10 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
-import {Welcome, SignUp, Login} from '~/auth';
+import {SignUp, Login} from '~/auth';
 
 const routes: RouteRecordRaw[] = [
-  {path: '/', name: 'Welcome', component: Welcome},
+  {path: '/', name: 'Login', component: Login},
   {path: '/signup', name: 'SignUp', component: SignUp},
-  {path: '/login', name: 'Login', component: Login},
 ];
 
 const router = createRouter({

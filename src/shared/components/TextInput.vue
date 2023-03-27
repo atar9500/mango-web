@@ -21,6 +21,8 @@ const {wide, error} = defineProps<InputProps>();
 defineEmits(['update:modelValue']);
 const $style = useCssModule();
 
+console.log('error', error);
+
 const _style = computed<string>(() => {
   let value = $style.root;
   if (wide) {

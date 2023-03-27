@@ -1,37 +1,32 @@
 <template>
   <div :class="$style.root">
     <Logo />
-    <div :class="$style.options">
-      <form @submit.prevent="submitForm">
-        <text-input
-          :class="$style.field"
-          v-model="email"
-          name="email"
-          placeholder="Email"
-          :error="!!errors.email"
-          wide />
-        <Button
-          :disabled="hasErrors"
-          :class="$style.continue"
-          type="submit"
-          wide
-          >Sign Up
-        </Button>
-      </form>
-    </div>
+    <form :class="$style.options" @submit.prevent="submitForm">
+      <text-input
+        v-model="email.value.value"
+        name="email"
+        placeholder="Email"
+        :error="!!errors.email"
+        wide />
+      <error-message :class="$style.error">{{ errors.email }}</error-message>
+      <Button :disabled="!meta.valid" :class="$style.button" type="submit" wide
+        >Sign Up
+      </Button>
+    </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed} from 'vue';
-import {useForm} from 'vee-validate';
+import {useForm, useField} from 'vee-validate';
 import {useRouter} from 'vue-router';
 import {toFormValidator} from '@vee-validate/zod';
 import * as zod from 'zod';
 
 import Button from '~/shared/components/Button.vue';
 import TextInput from '~/shared/components/TextInput.vue';
+
 import Logo from './Logo.vue';
+import ErrorMessage from './ErrorMessage.vue';
 
 const router = useRouter();
 
@@ -41,20 +36,17 @@ const validationSchema = toFormValidator(
   }),
 );
 
-const {errors, handleSubmit, validate, useFieldModel} = useForm({
+const {errors, meta, handleSubmit} = useForm({
   validationSchema,
 });
 
-const hasErrors = computed(() => !!Object.keys(errors.value).length);
-
 const submitForm = handleSubmit(async () => {
-  await validate();
-  if (Object.keys(errors.value).length === 0) {
+  if (meta.value.valid) {
     router.push({name: 'Login'});
   }
 });
 
-const email = useFieldModel('email');
+const email = useField<string>('email');
 </script>
 
 <style module>
@@ -67,12 +59,13 @@ const email = useFieldModel('email');
   padding: 32px;
 }
 
-.field {
+.error {
   margin: 0 0 var(--spacing-small) 0;
+  align-self: flex-start;
 }
 
-.continue {
-  margin: var(--spacing-large) 0 0 0;
+.button {
+  margin: var(--spacing-medium) 0 0;
 }
 
 .options {

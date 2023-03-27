@@ -1,42 +1,44 @@
 <template>
   <div :class="$style.root">
     <Logo />
-    <div :class="$style.options">
-      <form @submit.prevent="submitForm">
-        <text-input
-          :class="$style.field"
-          v-model="email"
-          type="email"
-          placeholder="Email"
-          wide />
-        <text-input
-          :class="$style.field"
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          wide />
-        <Button
-          type="submit"
-          :disabled="hasErrors"
-          :class="$style.continue"
-          wide
-          >Log In</Button
-        >
-      </form>
-    </div>
+    <form :class="$style.form" @submit.prevent="submitForm">
+      <text-input
+        v-model="email.value.value"
+        name="email"
+        type="email"
+        placeholder="Email"
+        :error="!!errors.email"
+        wide />
+      <error-message :class="$style.error">{{ errors.email }}</error-message>
+      <text-input
+        v-model="password.value.value"
+        name="password"
+        type="password"
+        placeholder="Password"
+        :error="!!errors.password"
+        wide />
+      <error-message :class="$style.error">{{ errors.password }}</error-message>
+      <Button type="submit" :disabled="!meta.valid" :class="$style.login" wide
+        >Log In
+      </Button>
+      <Button :on-click="onSignUp" :class="$style.button" wide>Sign Up </Button>
+    </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref, computed} from 'vue';
 import {toFormValidator} from '@vee-validate/zod';
+import {useForm, useField} from 'vee-validate';
 import * as zod from 'zod';
+import {useRouter} from 'vue-router';
 
 import Button from '~/shared/components/Button.vue';
 import TextInput from '~/shared/components/TextInput.vue';
 
 import Logo from './Logo.vue';
-import {useForm} from 'vee-validate';
+import ErrorMessage from './ErrorMessage.vue';
+
+const router = useRouter();
 
 const validationSchema = toFormValidator(
   zod.object({
@@ -45,20 +47,16 @@ const validationSchema = toFormValidator(
   }),
 );
 
-const {errors, handleSubmit, validate, useFieldModel} = useForm({
+const {errors, meta, handleSubmit} = useForm({
   validationSchema,
 });
 
-const submitForm = handleSubmit(async () => {
-  await validate();
-  if (Object.keys(errors.value).length === 0) {
-    // router.push({name: 'Login'});
-  }
-});
+const submitForm = handleSubmit(async () => router.push({name: 'SignUp'}));
 
-const hasErrors = computed(() => !!Object.keys(errors.value).length);
+const onSignUp = () => router.push({name: 'SignUp'});
 
-const [email, password] = useFieldModel(['email', 'password']);
+const email = useField<string>('email');
+const password = useField<string>('password');
 </script>
 
 <style module>
@@ -71,15 +69,16 @@ const [email, password] = useFieldModel(['email', 'password']);
   padding: 32px;
 }
 
-.field {
+.error {
   margin: 0 0 var(--spacing-small) 0;
+  align-self: flex-start;
 }
 
-.continue {
-  margin: var(--spacing-large) 0 0 0;
+.login {
+  margin: var(--spacing-medium) 0 var(--spacing-small);
 }
 
-.options {
+.form {
   width: 100%;
   display: flex;
   align-items: center;
