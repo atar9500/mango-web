@@ -8,7 +8,27 @@
         placeholder="Email"
         :error="!!errors.email"
         wide />
-      <error-message :class="$style.error">{{ errors.email }}</error-message>
+      <error-message :class="$style.error">
+        {{ errors.email }}
+      </error-message>
+      <text-input
+        v-model="firstName.value.value"
+        name="firstName"
+        placeholder="First Name"
+        :error="!!errors.firstName"
+        wide />
+      <error-message :class="$style.error">
+        {{ errors.firstName }}
+      </error-message>
+      <text-input
+        v-model="lastName.value.value"
+        name="lastName"
+        placeholder="Last Name"
+        :error="!!errors.lastName"
+        wide />
+      <error-message :class="$style.error">
+        {{ errors.lastName }}
+      </error-message>
       <Button :disabled="!meta.valid" :class="$style.button" type="submit" wide
         >Sign Up
       </Button>
@@ -33,6 +53,8 @@ const router = useRouter();
 const validationSchema = toFormValidator(
   zod.object({
     email: zod.string().nonempty().email(),
+    firstName: zod.string().nonempty().regex(/\p{L}/),
+    lastName: zod.string().nonempty().regex(/\p{L}/),
   }),
 );
 
@@ -47,6 +69,8 @@ const submitForm = handleSubmit(async () => {
 });
 
 const email = useField<string>('email');
+const firstName = useField<string>('firstName');
+const lastName = useField<string>('lastName');
 </script>
 
 <style module>

@@ -21,8 +21,6 @@ const {wide, error} = defineProps<InputProps>();
 defineEmits(['update:modelValue']);
 const $style = useCssModule();
 
-console.log('error', error);
-
 const _style = computed<string>(() => {
   let value = $style.root;
   if (wide) {
@@ -45,7 +43,7 @@ const _style = computed<string>(() => {
   padding: var(--spacing-small);
   box-sizing: border-box;
   outline: none;
-  opacity: 0.8;
+  opacity: 0.6;
   transition: opacity var(--animate-fast) linear,
     border var(--animate-fast) linear;
 }
@@ -61,7 +59,7 @@ const _style = computed<string>(() => {
 
 .root::placeholder {
   color: inherit;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .wide {
