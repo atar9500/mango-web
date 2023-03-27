@@ -15,13 +15,8 @@ import Logo from './Logo.vue';
 
 const router = useRouter();
 
-const onSignUp = () => {
-  router.push({name: 'SignUp'});
-};
-
-const onLogin = () => {
-  router.push({name: 'Login'});
-};
+const onSignUp = () => router.push({name: 'SignUp'});
+const onLogin = () => router.push({name: 'Login'});
 </script>
 
 <style module>

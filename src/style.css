@@ -45,7 +45,7 @@ button {
 
   --animate-fast: 150ms;
   --animate-normal: 300ms;
-  --animdate-slow: 700ms;
+  --animate-slow: 700ms;
 }
 
 @media (prefers-color-scheme: light) {

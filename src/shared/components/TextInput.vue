@@ -13,16 +13,24 @@ import {computed, useCssModule, defineEmits} from 'vue';
 type InputProps = {
   wide?: boolean;
   style?: string;
+  error?: boolean;
   modelValue?: string;
 };
 
-const {wide} = defineProps<InputProps>();
+const {wide, error} = defineProps<InputProps>();
 defineEmits(['update:modelValue']);
 const $style = useCssModule();
 
-const _style = computed<string>(
-  () => `${$style.root} ${wide ? $style.wide : ''} ${wide ? $style.wide : ''}`,
-);
+const _style = computed<string>(() => {
+  let value = $style.root;
+  if (wide) {
+    value += ` ${$style.wide}`;
+  }
+  if (error) {
+    value += ` ${$style.error}`;
+  }
+  return value;
+});
 </script>
 
 <style module>
@@ -35,6 +43,9 @@ const _style = computed<string>(
   padding: var(--spacing-small);
   box-sizing: border-box;
   outline: none;
+  opacity: 0.8;
+  transition: opacity var(--animate-fast) linear,
+    border var(--animate-fast) linear;
 }
 
 .error {
@@ -42,8 +53,12 @@ const _style = computed<string>(
   color: var(--error-color);
 }
 
+.root:focus {
+  opacity: 1;
+}
+
 .root::placeholder {
-  color: var(--primary-color);
+  color: inherit;
   opacity: 0.8;
 }
 

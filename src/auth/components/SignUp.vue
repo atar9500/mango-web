@@ -2,20 +2,59 @@
   <div :class="$style.root">
     <Logo />
     <div :class="$style.options">
-      <Input :class="$style.field" v-model="email" placeholder="Email" wide />
-      <Button :class="$style.continue" wide>Sign Up</Button>
+      <form @submit.prevent="submitForm">
+        <text-input
+          :class="$style.field"
+          v-model="email"
+          name="email"
+          placeholder="Email"
+          :error="!!errors.email"
+          wide />
+        <Button
+          :disabled="hasErrors"
+          :class="$style.continue"
+          type="submit"
+          wide
+          >Sign Up
+        </Button>
+      </form>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed} from 'vue';
+import {useForm} from 'vee-validate';
+import {useRouter} from 'vue-router';
+import {toFormValidator} from '@vee-validate/zod';
+import * as zod from 'zod';
 
 import Button from '~/shared/components/Button.vue';
-import Input from '~/shared/components/Input.vue';
+import TextInput from '~/shared/components/TextInput.vue';
 import Logo from './Logo.vue';
 
-const email = ref('');
+const router = useRouter();
+
+const validationSchema = toFormValidator(
+  zod.object({
+    email: zod.string().nonempty().email(),
+  }),
+);
+
+const {errors, handleSubmit, validate, useFieldModel} = useForm({
+  validationSchema,
+});
+
+const hasErrors = computed(() => !!Object.keys(errors.value).length);
+
+const submitForm = handleSubmit(async () => {
+  await validate();
+  if (Object.keys(errors.value).length === 0) {
+    router.push({name: 'Login'});
+  }
+});
+
+const email = useFieldModel('email');
 </script>
 
 <style module>
@@ -41,9 +80,5 @@ const email = ref('');
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.signUp {
-  margin: 0 0 12px 0;
 }
 </style>
