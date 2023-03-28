@@ -56,6 +56,8 @@ button {
     --accent-color: #8dc63f;
     --background-color: #f0e2e7;
     --text-color: #212121;
+    --light-text-color: #757575;
+    --light-text-color-2: #fefefe;
     --shadow-color: #212121;
     --warning-color: #eaca44;
     --error-color: #ef4d4d;
@@ -72,8 +74,9 @@ button {
     --accent-color: #8dc63f;
     --background-color: #f0e2e7;
     --text-color: #212121;
+    --light-text-color: #757575;
+    --light-text-color-2: #fefefe;
     --shadow-color: #212121;
-    --light-text-color: #fefefe;
     --warning-color: #eaca44;
     --error-color: #ef4d4d;
 

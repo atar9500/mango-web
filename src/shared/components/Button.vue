@@ -27,7 +27,7 @@ const _style = computed<string>(
   border-radius: var(--spacing-small);
   padding: var(--spacing-small);
   border: none;
-  color: var(--light-text-color);
+  color: var(--light-text-color-2);
   font-weight: bold;
   font-size: var(--font-size-medium);
   cursor: pointer;

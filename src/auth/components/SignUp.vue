@@ -1,37 +1,32 @@
 <template>
   <div :class="$style.root">
     <Logo />
-    <form :class="$style.options" @submit.prevent="submitForm">
-      <text-input
+    <form :class="$style.form" @submit.prevent="submitForm">
+      <TextInput
         v-model="email.value.value"
         name="email"
         placeholder="Email"
-        :error="!!errors.email"
         wide />
-      <error-message :class="$style.error">
+      <ErrorMessage :class="$style.error">
         {{ errors.email }}
-      </error-message>
-      <text-input
+      </ErrorMessage>
+      <TextInput
         v-model="firstName.value.value"
         name="firstName"
         placeholder="First Name"
-        :error="!!errors.firstName"
         wide />
-      <error-message :class="$style.error">
+      <ErrorMessage :class="$style.error">
         {{ errors.firstName }}
-      </error-message>
-      <text-input
+      </ErrorMessage>
+      <TextInput
         v-model="lastName.value.value"
         name="lastName"
         placeholder="Last Name"
-        :error="!!errors.lastName"
         wide />
-      <error-message :class="$style.error">
+      <ErrorMessage :class="$style.error">
         {{ errors.lastName }}
-      </error-message>
-      <Button :disabled="!meta.valid" :class="$style.button" type="submit" wide
-        >Sign Up
-      </Button>
+      </ErrorMessage>
+      <Button :class="$style.button" type="submit" wide>Sign Up</Button>
     </form>
   </div>
 </template>
@@ -50,22 +45,21 @@ import ErrorMessage from './ErrorMessage.vue';
 
 const router = useRouter();
 
+const REGEX_NAME =
+  /[^0-9-\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E]+$/;
+
 const validationSchema = toFormValidator(
   zod.object({
     email: zod.string().nonempty().email(),
-    firstName: zod.string().nonempty().regex(/\p{L}/),
-    lastName: zod.string().nonempty().regex(/\p{L}/),
+    firstName: zod.string().nonempty().regex(REGEX_NAME),
+    lastName: zod.string().nonempty().regex(REGEX_NAME),
   }),
 );
 
-const {errors, meta, handleSubmit} = useForm({
-  validationSchema,
-});
+const {errors, handleSubmit} = useForm({validationSchema});
 
 const submitForm = handleSubmit(async () => {
-  if (meta.value.valid) {
-    router.push({name: 'Login'});
-  }
+  router.push({name: 'Login'});
 });
 
 const email = useField<string>('email');
@@ -92,7 +86,7 @@ const lastName = useField<string>('lastName');
   margin: var(--spacing-medium) 0 0;
 }
 
-.options {
+.form {
   width: 100%;
   display: flex;
   align-items: center;

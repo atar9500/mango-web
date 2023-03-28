@@ -2,25 +2,23 @@
   <div :class="$style.root">
     <Logo />
     <form :class="$style.form" @submit.prevent="submitForm">
-      <text-input
+      <TextInput
         v-model="email.value.value"
         name="email"
         type="email"
         placeholder="Email"
         :error="!!errors.email"
         wide />
-      <error-message :class="$style.error">{{ errors.email }}</error-message>
-      <text-input
+      <ErrorMessage :class="$style.error">{{ errors.email }}</ErrorMessage>
+      <TextInput
         v-model="password.value.value"
         name="password"
         type="password"
         placeholder="Password"
         :error="!!errors.password"
         wide />
-      <error-message :class="$style.error">{{ errors.password }}</error-message>
-      <Button type="submit" :disabled="!meta.valid" :class="$style.login" wide
-        >Log In
-      </Button>
+      <ErrorMessage :class="$style.error">{{ errors.password }}</ErrorMessage>
+      <Button type="submit" :class="$style.login" wide>Log In </Button>
       <Button :on-click="onSignUp" :class="$style.button" wide>Sign Up </Button>
     </form>
   </div>
@@ -47,9 +45,7 @@ const validationSchema = toFormValidator(
   }),
 );
 
-const {errors, meta, handleSubmit} = useForm({
-  validationSchema,
-});
+const {errors, handleSubmit} = useForm({validationSchema});
 
 const submitForm = handleSubmit(async () => router.push({name: 'SignUp'}));
 

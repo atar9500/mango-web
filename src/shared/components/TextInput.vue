@@ -36,30 +36,29 @@ const _style = computed<string>(() => {
 <style module>
 .root {
   background-color: transparent;
-  border: 1px solid var(--primary-color);
+  border: 2px solid var(--light-text-color);
   border-radius: 8px;
-  color: var(--primary-color);
+  color: var(--text-color);
   font-size: var(--font-size-medium);
   padding: var(--spacing-small);
   box-sizing: border-box;
   outline: none;
-  opacity: 0.6;
-  transition: opacity var(--animate-fast) linear,
-    border var(--animate-fast) linear;
+  transition: color var(--animate-fast) linear;
 }
 
 .error {
-  border: 1px solid var(--error-color);
+  border: 2px solid var(--error-color);
   color: var(--error-color);
 }
 
 .root:focus {
-  opacity: 1;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
 }
 
 .root::placeholder {
   color: inherit;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .wide {
