@@ -7,7 +7,6 @@
         name="email"
         type="email"
         placeholder="Email"
-        :error="!!errors.email"
         wide />
       <ErrorMessage :class="$style.error">{{ errors.email }}</ErrorMessage>
       <TextInput
@@ -15,7 +14,6 @@
         name="password"
         type="password"
         placeholder="Password"
-        :error="!!errors.password"
         wide />
       <ErrorMessage :class="$style.error">{{ errors.password }}</ErrorMessage>
       <Button type="submit" :class="$style.login" wide>Log In </Button>

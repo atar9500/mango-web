@@ -5,6 +5,7 @@
       <TextInput
         v-model="email.value.value"
         name="email"
+        type="email"
         placeholder="Email"
         wide />
       <ErrorMessage :class="$style.error">
