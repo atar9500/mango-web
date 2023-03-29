@@ -27,7 +27,13 @@
       <ErrorMessage :class="$style.error">
         {{ errors.lastName }}
       </ErrorMessage>
-      <Button :class="$style.button" type="submit" wide>Sign Up</Button>
+      <Button
+        :disabled="store.signUp.loading"
+        :class="$style.button"
+        type="submit"
+        wide
+        >Sign Up</Button
+      >
     </form>
   </div>
 </template>
@@ -40,11 +46,14 @@ import * as zod from 'zod';
 
 import Button from '~/shared/components/Button.vue';
 import TextInput from '~/shared/components/TextInput.vue';
+import {useAuthStore} from '~/shared/store/useAuthStore';
 
 import Logo from './Logo.vue';
 import ErrorMessage from './ErrorMessage.vue';
 
 const router = useRouter();
+
+const store = useAuthStore();
 
 const REGEX_NAME =
   /[^0-9-\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E]+$/;
@@ -59,9 +68,7 @@ const validationSchema = toFormValidator(
 
 const {errors, handleSubmit} = useForm({validationSchema});
 
-const submitForm = handleSubmit(async () => {
-  router.push({name: 'Login'});
-});
+const submitForm = handleSubmit(async values => store.signUp.execute(values));
 
 const email = useField<string>('email');
 const firstName = useField<string>('firstName');

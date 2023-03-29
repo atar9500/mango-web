@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, useCssModule, defineEmits} from 'vue';
+import {computed, useCssModule} from 'vue';
 
 type InputProps = {
   wide?: boolean;

@@ -16,7 +16,13 @@
         placeholder="Password"
         wide />
       <ErrorMessage :class="$style.error">{{ errors.password }}</ErrorMessage>
-      <Button type="submit" :class="$style.login" wide>Log In </Button>
+      <Button
+        type="submit"
+        :disabled="store.login.loading"
+        :class="$style.login"
+        wide
+        >Log In
+      </Button>
       <Button :on-click="onSignUp" :class="$style.button" wide>Sign Up </Button>
     </form>
   </div>
@@ -30,9 +36,12 @@ import {useRouter} from 'vue-router';
 
 import Button from '~/shared/components/Button.vue';
 import TextInput from '~/shared/components/TextInput.vue';
+import {useAuthStore} from '~/shared/store/useAuthStore';
 
 import Logo from './Logo.vue';
 import ErrorMessage from './ErrorMessage.vue';
+
+const store = useAuthStore();
 
 const router = useRouter();
 
@@ -45,7 +54,7 @@ const validationSchema = toFormValidator(
 
 const {errors, handleSubmit} = useForm({validationSchema});
 
-const submitForm = handleSubmit(async () => router.push({name: 'SignUp'}));
+const submitForm = handleSubmit(async values => store.login.execute(values));
 
 const onSignUp = () => router.push({name: 'SignUp'});
 

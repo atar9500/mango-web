@@ -51,7 +51,7 @@ button {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --primary-color: #0077c8;
+    --primary-color: #2196f3;
     --secondary-color: #f9a41a;
     --accent-color: #8dc63f;
     --background-color: #f0e2e7;
@@ -69,7 +69,7 @@ button {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #0077c8;
+    --primary-color: #2196f3;
     --secondary-color: #f9a41a;
     --accent-color: #8dc63f;
     --background-color: #f0e2e7;

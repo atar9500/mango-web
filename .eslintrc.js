@@ -16,7 +16,6 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    '@welldone-software/modules-engagement': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     'no-console': ['warn', {allow: ['error', 'warn']}],
   },
